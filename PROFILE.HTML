@@ -1,0 +1,154 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Profile</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f2f2f2;
+            margin: 0;
+            padding: 0;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+        }
+
+        .container {
+            background-color: white;
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+            width: 300px;
+        }
+
+        h1 {
+            text-align: center;
+            color: #4CAF50;
+        }
+
+        .form-group {
+            margin-bottom: 15px;
+        }
+
+        .form-group label {
+            display: block;
+            margin-bottom: 5px;
+        }
+
+        .form-group input,
+        .form-group select {
+            width: 100%;
+            padding: 8px;
+            box-sizing: border-box;
+        }
+
+        .form-group button {
+            width: 100%;
+            padding: 10px;
+            background-color: #4CAF50;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            margin-top: 10px;
+        }
+
+        .form-group button:hover {
+            background-color: #45a049;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>Profile Information</h1>
+        <form id="profileForm">
+            <div class="form-group">
+                <label for="firstName">First Name</label>
+                <input type="text" id="firstName" name="firstName" required>
+            </div>
+            <div class="form-group">
+                <label for="lastName">Last Name</label>
+                <input type="text" id="lastName" name="lastName" required>
+            </div>
+            <div class="form-group">
+                <label for="phone">Phone Number</label>
+                <input type="tel" id="phone" name="phone" required>
+            </div>
+            <div class="form-group">
+                <label for="country">Country</label>
+                <select id="country" name="country" required>
+                    <option value="">Select Country</option>
+                    <option value="Pakistan">Pakistan</option>
+                    <option value="India">India</option>
+                    <option value="United States">United States</option>
+                    <option value="United Kingdom">United Kingdom</option>
+                    <option value="Canada">Canada</option>
+                    <!-- Add more countries as needed -->
+                </select>
+            </div>
+            <div class="form-group">
+                <label for="eyesColor">Eyes Color</label>
+                <select id="eyesColor" name="eyesColor" required>
+                    <option value="">Select Eyes Color</option>
+                    <option value="Brown">Brown</option>
+                    <option value="Blue">Blue</option>
+                    <option value="Green">Green</option>
+                    <option value="Gray">Gray</option>
+                    <option value="Hazel">Hazel</option>
+                    <!-- Add more eye colors as needed -->
+                </select>
+            </div>
+            <div class="form-group">
+                <button type="button" onclick="enableEditing()">Update</button>
+                <button type="submit" disabled id="saveButton">Save Changes</button>
+            </div>
+        </form>
+    </div>
+    <script>
+        document.getElementById('profileForm').addEventListener('submit', function(event) {
+            event.preventDefault();
+            // Save the data
+            const profileData = {
+                firstName: document.getElementById('firstName').value,
+                lastName: document.getElementById('lastName').value,
+                phone: document.getElementById('phone').value,
+                country: document.getElementById('country').value,
+                eyesColor: document.getElementById('eyesColor').value,
+            };
+            localStorage.setItem('profileData', JSON.stringify(profileData));
+            alert('Profile information saved successfully!');
+            disableEditing();
+        });
+
+        function enableEditing() {
+            document.querySelectorAll('#profileForm input, #profileForm select').forEach(function(element) {
+                element.disabled = false;
+            });
+            document.getElementById('saveButton').disabled = false;
+        }
+
+        function disableEditing() {
+            document.querySelectorAll('#profileForm input, #profileForm select').forEach(function(element) {
+                element.disabled = true;
+            });
+            document.getElementById('saveButton').disabled = true;
+        }
+
+        // Load the data
+        window.onload = function() {
+            const savedData = JSON.parse(localStorage.getItem('profileData'));
+            if (savedData) {
+                document.getElementById('firstName').value = savedData.firstName;
+                document.getElementById('lastName').value = savedData.lastName;
+                document.getElementById('phone').value = savedData.phone;
+                document.getElementById('country').value = savedData.country;
+                document.getElementById('eyesColor').value = savedData.eyesColor;
+            }
+            disableEditing(); // Disable fields initially
+        }
+    </script>
+</body>
+</html>

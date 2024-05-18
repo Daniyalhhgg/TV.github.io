@@ -1,0 +1,140 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Mining</title>
+    <style>
+        /* CSS styles */
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f2f2f2;
+            margin: 0;
+            padding: 0;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+        }
+
+        .container {
+            background-color: white;
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+            width: 80%;
+            max-width: 600px;
+            text-align: center;
+        }
+
+        h1 {
+            color: #4CAF50;
+        }
+
+        .mining-info {
+            margin-top: 20px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            border-bottom: 1px solid #ccc;
+            padding-bottom: 10px;
+        }
+
+        .mining-info p {
+            margin: 0;
+        }
+
+        .mining-actions {
+            margin-top: 20px;
+        }
+
+        .mining-button {
+            padding: 20px;
+            background-color: #4CAF50;
+            color: white;
+            border: none;
+            border-radius: 50%;
+            cursor: pointer;
+            font-size: 24px;
+            transition: background-color 0.3s ease;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+        }
+
+        .mining-button:hover {
+            background-color: #45a049;
+        }
+
+        #timer {
+            margin-top: 20px;
+            font-size: 28px;
+            color: #333;
+        }
+
+        #balance {
+            margin-top: 20px;
+            font-size: 24px;
+            color: #333;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>Mining Dashboard</h1>
+        <div class="mining-info">
+            <p id="userName"></p>
+            <p id="balance">Balance: $0</p>
+        </div>
+        <div class="mining-actions">
+            <button class="mining-button" onclick="startMining()">TV</button>
+        </div>
+        <div id="timer"></div>
+    </div>
+
+    <script>
+        // Retrieve user data from localStorage
+        const userData = JSON.parse(localStorage.getItem('profileData'));
+        const balanceElement = document.getElementById('balance');
+        const timerElement = document.getElementById('timer');
+        let balance = 0;
+
+        // Display user's name on the mining page
+        const userNameElement = document.getElementById('userName');
+        if (userData && userData.firstName && userData.lastName) {
+            userNameElement.textContent = `User: ${userData.firstName} ${userData.lastName}`;
+        }
+
+        // Start mining logic
+        function startMining() {
+            // Disable the mining button during the mining process
+            document.querySelector('.mining-button').disabled = true;
+
+            // Simulate mining process (replace with actual mining logic)
+            setTimeout(() => {
+                // Update balance after 24 hours
+                balance = 1; // Update balance to 1 after 24 hours
+                balanceElement.textContent = `Balance: $${balance.toFixed(2)}`;
+
+                // Enable the mining button after 24 hours
+                document.querySelector('.mining-button').disabled = false;
+            }, 86400000); // 24 hours in milliseconds
+
+            // Start timer countdown
+            let timeLeft = 86400; // 24 hours in seconds
+            const timerInterval = setInterval(() => {
+                const hours = Math.floor(timeLeft / 3600);
+                const minutes = Math.floor((timeLeft % 3600) / 60);
+                const seconds = timeLeft % 60;
+
+                timerElement.textContent = `Next Mining in ${hours}h ${minutes}m ${seconds}s`;
+
+                if (timeLeft === 0) {
+                    clearInterval(timerInterval);
+                    timerElement.textContent = 'Mining available';
+                } else {
+                    timeLeft--;
+                }
+            }, 1000); // Update timer every second (1000 milliseconds)
+        }
+    </script>
+</body>
+</html>

